@@ -10,24 +10,6 @@ Production-ready pipeline for searching and matching legal identity records usin
 
 ### Architecture Overview
 
-```mermaid
-flowchart LR
-    A[Input] -->|Text form| B[ExtendedLegalIdentity]
-    A -->|OCR image| V[Google Cloud Vision]
-    V --> B
-    B --> C[Weighted Text Builder]
-    C --> D1[TF-IDF]
-    D1 --> D2[SVD]
-    C --> E[Sentence Transformer]
-    D2 --> F[Normalize]
-    E --> G[Normalize]
-    F --> H[Concatenate (alpha·TFIDF_SVD || beta·ST)]
-    G --> H
-    H --> I[Qdrant Query]
-    I --> J[Top-k Candidates]
-    J --> K[Hybrid Comparator]
-    K --> L[Results Table]
-```
 
 ```mermaid
 sequenceDiagram
@@ -138,24 +120,7 @@ Open the printed local URL in a browser.
 - Vector DB search:
   - `app/load_vector_point.py::NeuralSearcher.seach_by_legal_identity(...)` queries Qdrant with the hybrid vector and returns payloads with similarity scores.
 
-### Using the UI
-- Tab “Search by Text”: enter ID number, name, DOB, gender, etc.; click Search.
-- Tab “Search by OCR”: upload an ID image; the app uses Google Vision to parse text, populates the form, and you can Search.
-- Results show top matches with both the raw similarity score from Qdrant and a semantic score computed by the hybrid comparator.
-
 ### UI Preview and Output
-- Replace the placeholder below with your own screenshots after you run the app.
-
-```text
-docs/
-  images/
-    ui-search-text.png
-    ui-search-ocr.png
-```
-
-![Search by Text](docs/images/ui-search-text.png)
-
-![Search by OCR](docs/images/ui-search-ocr.png)
 
 Sample result format returned by the app:
 
