@@ -1,0 +1,19 @@
+{
+  "field_weights": {
+    "ID": 3,
+    "TEN_CHINH": 3,
+    "NGAY_SINH": 2,
+    "DIA_CHI_THUONG_TRU": 2,
+    "NOI_SINH": 1,
+    "QUE_QUAN": 1,
+    "GIOI_TINH": 1,
+    "NGHE_NGHIEP": 0
+  },
+  "train_dataset_path": "dataset/DSDT.xlsx",
+  "transformer_model_name": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "alpha": 0.5,
+  "beta": 1.0,
+  "device": "cpu",
+  "model_dir": "models",
+  "model_version": "v1"
+}
